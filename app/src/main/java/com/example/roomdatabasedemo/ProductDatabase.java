@@ -14,7 +14,7 @@ import android.support.annotation.NonNull;
 //import androidx.room.RoomDatabase;
 //import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Product.class},version = 1)
+@Database(entities = {Product.class},version = 1,exportSchema = false)
 public abstract class ProductDatabase extends RoomDatabase {
 
     private static ProductDatabase instance;

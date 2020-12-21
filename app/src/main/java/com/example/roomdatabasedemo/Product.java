@@ -22,6 +22,10 @@ public class Product {
         this.productPrice = productPrice;
     }
 
+    public int getProductId() {
+        return productId;
+    }
+
     public void setProductId(int productId) {
         this.productId = productId;
     }
