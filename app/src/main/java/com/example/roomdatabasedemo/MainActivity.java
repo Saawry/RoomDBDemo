@@ -5,18 +5,22 @@ package com.example.roomdatabasedemo;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int ADD_PRODUCT_REQUEST = 1;
     private ProductViewModel productViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,16 @@ public class MainActivity extends AppCompatActivity {
         final ProductAdapter adapter = new ProductAdapter();
         recyclerView.setAdapter(adapter);
 
+
+        FloatingActionButton buttonAddNote = findViewById(R.id.button_add_note);
+        buttonAddNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
+                startActivityForResult(intent, ADD_PRODUCT_REQUEST);
+            }
+        });
+
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
         productViewModel.getAllProducts().observe(this, new Observer<List<Product>>() {
             @Override
@@ -41,5 +55,21 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setProducts(products);
             }
         });
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ADD_PRODUCT_REQUEST && resultCode == RESULT_OK) {
+            String title = data.getStringExtra(AddProductActivity.EXTRA_TITLE);
+            String price = data.getStringExtra(AddProductActivity.EXTRA_PRICE);
+
+            Product product = new Product(title, price);
+            productViewModel.insert(product);
+            Toast.makeText(this, "Product Added", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Product not Added", Toast.LENGTH_SHORT).show();
+        }
     }
 }

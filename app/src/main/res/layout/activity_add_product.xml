@@ -6,6 +6,37 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".AddProductActivity">
+    <TextView
+        android:background="@color/purple_200"
+        android:text="Add Product"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="Name"
+        android:id="@+id/product_add_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
 
+    <EditText
+        android:hint="Price"
+        android:id="@+id/product_add_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:textColor="@color/white"
+        android:background="@color/purple_500"
+        android:id="@+id/product_add_btn" />
 </LinearLayout>
