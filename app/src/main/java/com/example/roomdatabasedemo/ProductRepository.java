@@ -1,10 +1,11 @@
 package com.example.roomdatabasedemo;
 
 import android.app.Application;
+import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import androidx.lifecycle.LiveData;
-import androidx.loader.content.AsyncTaskLoader;
+//import androidx.lifecycle.LiveData;
+
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ProductRepository {
         new DeleteProductAsyncTask(productDAO).execute(product);
     }
 
-    public void deleteAllProducts(Product product) {
+    public void deleteAllProducts() {
         new DeleteAllProductsAsyncTask(productDAO).execute();
     }
 

@@ -1,13 +1,18 @@
 package com.example.roomdatabasedemo;
 
+import android.arch.persistence.db.SupportSQLiteDatabase;
+import android.arch.persistence.room.Database;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 import android.os.AsyncTask;
-
-import androidx.annotation.NonNull;
-import androidx.room.Database;
-import androidx.room.Room;
-import androidx.room.RoomDatabase;
-import androidx.sqlite.db.SupportSQLiteDatabase;
+import android.support.annotation.NonNull;
+//
+//import androidx.annotation.NonNull;
+//import androidx.room.Database;
+//import androidx.room.Room;
+//import androidx.room.RoomDatabase;
+//import androidx.sqlite.db.SupportSQLiteDatabase;
 
 @Database(entities = {Product.class},version = 1)
 public abstract class ProductDatabase extends RoomDatabase {
@@ -29,18 +34,18 @@ public abstract class ProductDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            new PopulateDbAsyncTask(instance).execute();
+            new PopulateDbAsyncTask(instance).execute();                                 //deprecated execute()
         }
     };
 
-    private static class PopulateDbAsyncTask extends AsyncTask<Void,Void,Void>{
+    private static class PopulateDbAsyncTask extends AsyncTask<Void,Void,Void>{           //deprecated AsyncTask
         private ProductDAO productDAO;
         private PopulateDbAsyncTask(ProductDatabase productDatabase){
             productDAO=productDatabase.productDAO();
         }
 
         @Override
-        protected Void doInBackground(Void... voids) {
+        protected Void doInBackground(Void... voids) {                                  // deprecated doInBackground
             productDAO.insertProduct(new Product("name 1","10"));
             productDAO.insertProduct(new Product("name 2","20"));
             productDAO.insertProduct(new Product("name 3","30"));
