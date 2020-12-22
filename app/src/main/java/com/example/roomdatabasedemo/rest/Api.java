@@ -1,24 +1,35 @@
 package com.example.roomdatabasedemo.rest;
 
+import com.example.roomdatabasedemo.StudentDetailsResponse;
+
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface Api {
-//    @FormUrlEncoded
-//    @POST("verify")
-//    Call<VerifyResponse> Verify(
-//            @Field("mobile") String mobile,
-//            @Field("otp") String otp,
-//            @Field("mac_address") String mac_address
-//    );
-//    @GET("verify")
-//    Call<VerifyResponse> Verify(
-//            @Field("mobile") String mobile,
-//            @Field("otp") String otp,
-//            @Field("mac_address") String mac_address
-//    );
+    @FormUrlEncoded
+    @POST("Api/Student/AddStudent")
+    Call<Dflt> AddNewStudent(
+            @Field("studentId") String studentId,
+            @Field("studentRoll") String studentRoll,
+            @Field("admissionDate") String admissionDate,
+            @Field("DateOfBirth") String DateOfBirth,
+            @Field("ShiftId") String ShiftId,
+            @Field("classId") String classId,
+            @Field("sectionId") String sectionId,
+            @Field("imageName") String imageName,
+            @Field("createdTime") String createdTime,
+            @Field("createdBy") String createdBy,
+            @Field("status") String status,
+            @Field("Guardian_Phone") String Guardian_Phone,
+            @Field("Relation") String Relation
+    );
+    @GET("Api/Student/GetStudent")
+    Call<StudentDetailsResponse> GetStudentDetails(
+            @Field("studentId") String studentId
+    );
 
 //    @FormUrlEncoded
 //    @PUT("user")

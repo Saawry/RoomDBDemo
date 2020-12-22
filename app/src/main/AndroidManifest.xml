@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RoomDatabaseDemo"
         android:usesCleartextTraffic="true">
-        <activity android:name=".AddStudent"></activity>
+        <activity android:name=".ViewStudentDetails"></activity>
+        <activity android:name=".AddStudent" />
         <activity android:name=".UpdateActivity" />
         <activity android:name=".AddProductActivity" />
         <activity android:name=".MainActivity">

@@ -2,11 +2,31 @@ package com.example.roomdatabasedemo;
 
 import android.support.annotation.NonNull;
 
-public class studentInfo {
+public class StudentInfo {
     private String Id,studentId,studentRoll,admissionDate,DateOfBirth,ShiftId,classId,sectionId,imageName,createdTime,createdBy,status,Guardian_Phone,Relation;
 
-    public studentInfo(String id, String studentId, String studentRoll, String admissionDate, String dateOfBirth, String shiftId, String classId, String sectionId, String imageName, String createdTime, String createdBy, String status, String guardian_Phone, String relation) {
+    public StudentInfo() {
+
+    }
+
+    public StudentInfo(String id, String studentId, String studentRoll, String admissionDate, String dateOfBirth, String shiftId, String classId, String sectionId, String imageName, String createdTime, String createdBy, String status, String guardian_Phone, String relation) {
         Id = id;
+        this.studentId = studentId;
+        this.studentRoll = studentRoll;
+        this.admissionDate = admissionDate;
+        DateOfBirth = dateOfBirth;
+        ShiftId = shiftId;
+        this.classId = classId;
+        this.sectionId = sectionId;
+        this.imageName = imageName;
+        this.createdTime = createdTime;
+        this.createdBy = createdBy;
+        this.status = status;
+        Guardian_Phone = guardian_Phone;
+        Relation = relation;
+    }
+
+    public StudentInfo(String studentId, String studentRoll, String admissionDate, String dateOfBirth, String shiftId, String classId, String sectionId, String imageName, String createdTime, String createdBy, String status, String guardian_Phone, String relation) {
         this.studentId = studentId;
         this.studentRoll = studentRoll;
         this.admissionDate = admissionDate;

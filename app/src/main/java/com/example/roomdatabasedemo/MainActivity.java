@@ -44,12 +44,9 @@ public class MainActivity extends AppCompatActivity {
 
 
         FloatingActionButton buttonAddNote = findViewById(R.id.button_add_note);
-        buttonAddNote.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
-                startActivityForResult(intent, ADD_PRODUCT_REQUEST);
-            }
+        buttonAddNote.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
+            startActivityForResult(intent, ADD_PRODUCT_REQUEST);
         });
 
         productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
