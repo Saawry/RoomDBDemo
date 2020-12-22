@@ -1,9 +1,11 @@
-package com.example.roomdatabasedemo;
+package com.example.roomdatabasedemo.room;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
+
+import com.example.roomdatabasedemo.Product;
 
 import java.util.List;
 

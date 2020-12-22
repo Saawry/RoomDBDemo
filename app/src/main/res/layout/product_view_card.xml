@@ -16,7 +16,8 @@
         android:id="@+id/product_card_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:padding="5dp"
         android:text="Title"
         android:textAlignment="center" />
@@ -25,7 +26,8 @@
         android:id="@+id/product_card_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:padding="5dp"
         android:text="Price"
         android:textAlignment="center" />

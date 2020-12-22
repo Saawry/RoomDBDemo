@@ -1,4 +1,4 @@
-package com.example.roomdatabasedemo;
+package com.example.roomdatabasedemo.room;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
@@ -6,6 +6,10 @@ import android.os.AsyncTask;
 
 //import androidx.lifecycle.LiveData;
 
+
+import com.example.roomdatabasedemo.Product;
+import com.example.roomdatabasedemo.room.ProductDAO;
+import com.example.roomdatabasedemo.room.ProductDatabase;
 
 import java.util.List;
 

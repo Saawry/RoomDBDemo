@@ -3,18 +3,20 @@ package com.example.roomdatabasedemo;
 //import androidx.appcompat.app.AppCompatActivity;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.Toast;
+
+import com.example.roomdatabasedemo.room.ProductViewModel;
 
 import java.util.List;
 
@@ -29,9 +31,12 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.recycler_view);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(mLayoutManager);
-        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(staggeredGridLayoutManager);
+
+//        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+//        recyclerView.setLayoutManager(mLayoutManager);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
         final ProductAdapter adapter = new ProductAdapter();
@@ -55,6 +60,22 @@ public class MainActivity extends AppCompatActivity {
                 adapter.setProducts(products);
             }
         });
+
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                productViewModel.delete(adapter.getProductAt(viewHolder.getAdapterPosition()));
+                Toast.makeText(MainActivity.this, "Note deleted", Toast.LENGTH_SHORT).show();
+            }
+        }).attachToRecyclerView(recyclerView);
+
+
     }
 
 
@@ -72,4 +93,28 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Product not Added", Toast.LENGTH_SHORT).show();
         }
     }
+
+//    Call<ActivePackagesResponse> call = RetrofitClient.getInstance().getApi().GetMyActivepPkgs("Bearer " + token);
+//        call.enqueue(new Callback<ActivePackagesResponse>() {
+//        @Override
+//        public void onResponse(Call<ActivePackagesResponse> call, Response<ActivePackagesResponse> response) {
+//            if (response.isSuccessful()) {
+//                progressDialog.dismiss();
+//                mypkgList = response.body().getData();
+//
+//                pkgAdapter = new MyPackageAdapter(getActivity(), mypkgList,client,lc);
+//                pkgRecycler.setAdapter(pkgAdapter);
+//                progressDialog.dismiss();
+//            }else{
+//                //Toast.makeText(getContext(), response.code()+" - "+response.message(), Toast.LENGTH_SHORT).show();
+//                progressDialog.dismiss();
+//            }
+//        }
+//
+//        @Override
+//        public void onFailure(Call<ActivePackagesResponse> call, Throwable t) {
+//            Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+//            progressDialog.dismiss();
+//        }
+//    });
 }
