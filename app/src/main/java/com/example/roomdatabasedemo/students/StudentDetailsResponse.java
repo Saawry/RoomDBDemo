@@ -1,4 +1,4 @@
-package com.example.roomdatabasedemo;
+package com.example.roomdatabasedemo.students;
 
 public class StudentDetailsResponse {
     private StudentInfo data;

@@ -1,4 +1,4 @@
-package com.example.roomdatabasedemo;
+package com.example.roomdatabasedemo.students;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.roomdatabasedemo.R;
 import com.example.roomdatabasedemo.rest.RetrofitClient;
 
 import retrofit2.Call;

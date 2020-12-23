@@ -13,17 +13,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.view.View;
 import android.widget.Toast;
 
-import com.example.roomdatabasedemo.room.ProductViewModel;
+import com.example.roomdatabasedemo.room.ObjectViewModel;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final int ADD_PRODUCT_REQUEST = 1;
-    private ProductViewModel productViewModel;
+    private ObjectViewModel objectViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,14 +48,8 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, ADD_PRODUCT_REQUEST);
         });
 
-        productViewModel = ViewModelProviders.of(this).get(ProductViewModel.class);
-        productViewModel.getAllProducts().observe(this, new Observer<List<Product>>() {
-            @Override
-            public void onChanged(@Nullable List<Product> products) {
-
-                adapter.setProducts(products);
-            }
-        });
+        objectViewModel = ViewModelProviders.of(this).get(ObjectViewModel.class);
+        objectViewModel.getAllProducts().observe(this, products -> adapter.setProducts(products));
 
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0,
@@ -67,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
             }
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                productViewModel.delete(adapter.getProductAt(viewHolder.getAdapterPosition()));
+                objectViewModel.delete(adapter.getProductAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(MainActivity.this, "Note deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
@@ -84,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             String price = data.getStringExtra(AddProductActivity.EXTRA_PRICE);
 
             Product product = new Product(title, price);
-            productViewModel.insert(product);
+            objectViewModel.insert(product);
             Toast.makeText(this, "Product Added", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "Product not Added", Toast.LENGTH_SHORT).show();

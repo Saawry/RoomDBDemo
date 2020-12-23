@@ -1,7 +1,9 @@
 package com.example.roomdatabasedemo.rest;
 
-import com.example.roomdatabasedemo.StudentDetailsResponse;
+import com.example.roomdatabasedemo.students.AllStudentsResponse;
+import com.example.roomdatabasedemo.students.StudentDetailsResponse;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -11,7 +13,7 @@ import retrofit2.http.POST;
 public interface Api {
     @FormUrlEncoded
     @POST("Api/Student/AddStudent")
-    Call<Dflt> AddNewStudent(
+    Call<ResponseBody> AddNewStudent(
             @Field("studentId") String studentId,
             @Field("studentRoll") String studentRoll,
             @Field("admissionDate") String admissionDate,
@@ -26,11 +28,20 @@ public interface Api {
             @Field("Guardian_Phone") String Guardian_Phone,
             @Field("Relation") String Relation
     );
+
+//    @FormUrlEncoded
+//    @POST("Api/Student/AddStudent")
+//    Call<ResponseBody> AddNewStudent(
+//            @Field("studentInfo") StudentInfo studentInfo
+//    );
+
     @GET("Api/Student/GetStudent")
     Call<StudentDetailsResponse> GetStudentDetails(
             @Field("studentId") String studentId
     );
 
+    @GET("Api/Student/GetAllStudent")
+    Call<AllStudentsResponse> GetAllStudentDetails();
 //    @FormUrlEncoded
 //    @PUT("user")
 //    Call<DfltResponse> UpdateInfo(

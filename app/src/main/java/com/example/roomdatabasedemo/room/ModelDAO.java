@@ -15,11 +15,12 @@ import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import com.example.roomdatabasedemo.Product;
+import com.example.roomdatabasedemo.students.StudentInfo;
 
 import java.util.List;
 
 @Dao
-public interface ProductDAO {
+public interface ModelDAO {
 
     @Insert
     void insertProduct(Product product);
@@ -35,5 +36,24 @@ public interface ProductDAO {
 
     @Query("delete from product_table")
     void deleteAllProducts();
+
+
+    @Insert
+    void insertStudent(StudentInfo studentInfo);
+
+    @Delete
+    void deleteStudent(StudentInfo studentInfo);
+
+    @Update
+    void updateStudent(StudentInfo studentInfo);
+
+    @Query("select * from students_info_table")
+    LiveData<List<StudentInfo>> getAllStudents();
+
+    @Query("delete from students_info_table")
+    void deleteAllStudents();
+
+
+
 
 }

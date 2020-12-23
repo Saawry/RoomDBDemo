@@ -8,110 +8,114 @@ import android.os.AsyncTask;
 
 
 import com.example.roomdatabasedemo.Product;
-import com.example.roomdatabasedemo.room.ProductDAO;
-import com.example.roomdatabasedemo.room.ProductDatabase;
+import com.example.roomdatabasedemo.students.StudentInfo;
 
 import java.util.List;
 
-public class ProductRepository {
-    private ProductDAO productDAO;
+public class ModelRepository {
+    private ModelDAO modelDAO;
     private LiveData<List<Product>> allProducts;
+    private LiveData<List<StudentInfo>> allStudents;
 
-    public ProductRepository(Application application) {
+    public ModelRepository(Application application) {
 
-        ProductDatabase productDatabase = ProductDatabase.getInstance(application);
-        productDAO = productDatabase.productDAO();
-        allProducts = productDAO.getAllProducts();
+        ModelDatabase modelDatabase = ModelDatabase.getInstance(application);
+        modelDAO = modelDatabase.modelDAO();
+        allProducts = modelDAO.getAllProducts();
+        allStudents = modelDAO.getAllStudents();
     }
 
     public void insert(Product product) {
-        new InsertProductAsyncTask(productDAO).execute(product);
+        new InsertProductAsyncTask(modelDAO).execute(product);
     }
 
     public void update(Product product) {
-        new UpdateProductAsyncTask(productDAO).execute(product);
+        new UpdateProductAsyncTask(modelDAO).execute(product);
     }
 
     public void delete(Product product) {
-        new DeleteProductAsyncTask(productDAO).execute(product);
+        new DeleteProductAsyncTask(modelDAO).execute(product);
     }
 
     public void deleteAllProducts() {
-        new DeleteAllProductsAsyncTask(productDAO).execute();
+        new DeleteAllProductsAsyncTask(modelDAO).execute();
     }
 
     public LiveData<List<Product>> getAllProducts() {
         return allProducts;
     }
+    public LiveData<List<StudentInfo>> getAllStudents() {
+        return allStudents;
+    }
 
 
     private static class InsertProductAsyncTask extends AsyncTask<Product, Void, Void> {
 
-        private ProductDAO productDAO;
+        private ModelDAO modelDAO;
 
-        public InsertProductAsyncTask(ProductDAO productDAO) {
-            this.productDAO = productDAO;
+        public InsertProductAsyncTask(ModelDAO modelDAO) {
+            this.modelDAO = modelDAO;
         }
 
         @Override
         protected Void doInBackground(Product... products) {
-            productDAO.insertProduct(products[0]);
+            modelDAO.insertProduct(products[0]);
             return null;
         }
     }
     private static class UpdateProductAsyncTask extends AsyncTask<Product, Void, Void> {
 
-        private ProductDAO productDAO;
+        private ModelDAO modelDAO;
 
-        public UpdateProductAsyncTask(ProductDAO productDAO) {
-            this.productDAO = productDAO;
+        public UpdateProductAsyncTask(ModelDAO modelDAO) {
+            this.modelDAO = modelDAO;
         }
 
         @Override
         protected Void doInBackground(Product... products) {
-            productDAO.updateProduct(products[0]);
+            modelDAO.updateProduct(products[0]);
             return null;
         }
     }
     private static class DeleteProductAsyncTask extends AsyncTask<Product, Void, Void> {
 
-        private ProductDAO productDAO;
+        private ModelDAO modelDAO;
 
-        public DeleteProductAsyncTask(ProductDAO productDAO) {
-            this.productDAO = productDAO;
+        public DeleteProductAsyncTask(ModelDAO modelDAO) {
+            this.modelDAO = modelDAO;
         }
 
         @Override
         protected Void doInBackground(Product... products) {
-            productDAO.deleteProduct(products[0]);
+            modelDAO.deleteProduct(products[0]);
             return null;
         }
     }
     private static class DeleteAllProductsAsyncTask extends AsyncTask<Void, Void, Void> {
 
-        private ProductDAO productDAO;
+        private ModelDAO modelDAO;
 
-        public DeleteAllProductsAsyncTask(ProductDAO productDAO) {
-            this.productDAO = productDAO;
+        public DeleteAllProductsAsyncTask(ModelDAO modelDAO) {
+            this.modelDAO = modelDAO;
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            productDAO.deleteAllProducts();
+            modelDAO.deleteAllProducts();
             return null;
         }
     }
 //    private static class GetAllProductsAsyncTask extends AsyncTask<Product, Void, Void> {
 //
-//        private ProductDAO productDAO;
+//        private ModelDAO modelDAO;
 //
-//        public GetAllProductsAsyncTask(ProductDAO productDAO) {
-//            this.productDAO = productDAO;
+//        public GetAllProductsAsyncTask(ModelDAO modelDAO) {
+//            this.modelDAO = modelDAO;
 //        }
 //
 //        @Override
 //        protected Void doInBackground(Product... products) {
-//            productDAO.getAllProducts();
+//            modelDAO.getAllProducts();
 //            return null;
 //        }
 //    }

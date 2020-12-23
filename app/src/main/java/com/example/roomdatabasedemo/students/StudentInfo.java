@@ -1,7 +1,10 @@
-package com.example.roomdatabasedemo;
+package com.example.roomdatabasedemo.students;
 
+import android.arch.persistence.room.Entity;
 import android.support.annotation.NonNull;
 
+
+@Entity(tableName = "students_info_table")
 public class StudentInfo {
     private String Id,studentId,studentRoll,admissionDate,DateOfBirth,ShiftId,classId,sectionId,imageName,createdTime,createdBy,status,Guardian_Phone,Relation;
 
