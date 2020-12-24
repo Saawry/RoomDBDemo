@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.example.roomdatabasedemo.Product;
+import com.example.roomdatabasedemo.actor.Actor;
 import com.example.roomdatabasedemo.students.StudentInfo;
 //
 //import androidx.annotation.NonNull;
@@ -17,7 +18,7 @@ import com.example.roomdatabasedemo.students.StudentInfo;
 //import androidx.room.RoomDatabase;
 //import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Product.class, StudentInfo.class},version = 1,exportSchema = false)
+@Database(entities = {Product.class, StudentInfo.class, Actor.class},version = 3,exportSchema = false)
 public abstract class ModelDatabase extends RoomDatabase {
 
     private static ModelDatabase instance;

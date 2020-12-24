@@ -11,10 +11,12 @@ import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
 import com.example.roomdatabasedemo.Product;
+import com.example.roomdatabasedemo.actor.Actor;
 import com.example.roomdatabasedemo.students.StudentInfo;
 
 import java.util.List;
@@ -40,6 +42,8 @@ public interface ModelDAO {
 
     @Insert
     void insertStudent(StudentInfo studentInfo);
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    void insertAllStudent(List<StudentInfo> studentsInfo);
 
     @Delete
     void deleteStudent(StudentInfo studentInfo);
@@ -54,6 +58,13 @@ public interface ModelDAO {
     void deleteAllStudents();
 
 
+
+    //--------
+    @Query("select * from actor_table")
+    LiveData<List<Actor>> getAllActors();
+
+    @Insert
+    void insertActors(List<Actor> actor);
 
 
 }

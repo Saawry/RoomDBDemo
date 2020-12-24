@@ -15,6 +15,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.Toast;
 
+import com.example.roomdatabasedemo.actor.ActorActivity;
 import com.example.roomdatabasedemo.room.ObjectViewModel;
 
 import java.util.List;
@@ -43,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         FloatingActionButton buttonAddNote = findViewById(R.id.button_add_note);
+        FloatingActionButton buttonActor = findViewById(R.id.button_actor);
+        buttonActor.setOnClickListener(v -> {
+            Intent intent2 = new Intent(MainActivity.this, ActorActivity.class);
+            startActivity(intent2);
+        });
         buttonAddNote.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
             startActivityForResult(intent, ADD_PRODUCT_REQUEST);

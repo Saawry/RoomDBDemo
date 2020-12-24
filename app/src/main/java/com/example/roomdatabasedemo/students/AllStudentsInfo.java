@@ -10,7 +10,10 @@ import android.widget.Toast;
 
 import com.example.roomdatabasedemo.R;
 import com.example.roomdatabasedemo.rest.RetrofitClient;
+import com.example.roomdatabasedemo.room.ModelRepository;
 import com.example.roomdatabasedemo.room.ObjectViewModel;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,6 +22,7 @@ import retrofit2.Response;
 public class AllStudentsInfo extends AppCompatActivity {
 
     private ObjectViewModel objectViewModel;
+    private ModelRepository modelRepository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +35,7 @@ public class AllStudentsInfo extends AppCompatActivity {
         final StudentAdapter adapter = new StudentAdapter();
         recyclerView.setAdapter(adapter);
 
+        modelRepository=new ModelRepository(getApplication());
 
         objectViewModel = ViewModelProviders.of(this).get(ObjectViewModel.class);
         objectViewModel.getAllStudents().observe(this, studentsInfo -> adapter.setStudents(studentsInfo));
@@ -41,7 +46,11 @@ public class AllStudentsInfo extends AppCompatActivity {
             public void onResponse(Call<AllStudentsResponse> call, Response<AllStudentsResponse> response) {
                 if (response.isSuccessful()) {
 
+                    modelRepository.InsertAllStudent(response.body().getStudentInfoList());
 
+//                    List<StudentInfo> studentList;
+//                    studentList=response.body().getStudentInfoList();
+//                    adapter.setStudents(studentList);
                 } else {
                     Toast.makeText(AllStudentsInfo.this, response.code() + " - " + response.message(), Toast.LENGTH_SHORT).show();
                 }

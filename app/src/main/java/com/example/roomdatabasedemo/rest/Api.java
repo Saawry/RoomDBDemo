@@ -1,7 +1,11 @@
 package com.example.roomdatabasedemo.rest;
 
+import com.example.roomdatabasedemo.actor.Actor;
+import com.example.roomdatabasedemo.actor.ActorResponse;
 import com.example.roomdatabasedemo.students.AllStudentsResponse;
 import com.example.roomdatabasedemo.students.StudentDetailsResponse;
+
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -42,6 +46,13 @@ public interface Api {
 
     @GET("Api/Student/GetAllStudent")
     Call<AllStudentsResponse> GetAllStudentDetails();
+
+
+
+    @GET("data.php")
+    Call<List<Actor>> GetActorDetails();
+
+
 //    @FormUrlEncoded
 //    @PUT("user")
 //    Call<DfltResponse> UpdateInfo(

@@ -4,7 +4,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
-    private static final String BASE_URL = "http://newambs.ambitioussoftwares.com/";
+    private static final String BASE_URL = "http://www.codingwithjks.tech/";
+    //private static final String BASE_URL = "http://newambs.ambitioussoftwares.com/";
     private static RetrofitClient retrofitClient;
     private Retrofit retrofit;
 
