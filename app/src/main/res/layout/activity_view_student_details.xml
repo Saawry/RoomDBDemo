@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".students.ViewStudentDetails">
+    <EditText
+        android:hint="Student Id"
+        android:id="@+id/student_details_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+
+    <Button
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View"
+        android:textColor="@color/white"
+        android:background="@color/purple_500"
+        android:id="@+id/Student_details_btn" />
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/student_details_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+</LinearLayout>

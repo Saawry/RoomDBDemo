@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".students.AddStudent">
+
+    <EditText
+        android:hint="studentId"
+        android:id="@+id/student_id_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+
+    <EditText
+        android:hint="studentRoll"
+        android:id="@+id/student_roll_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="admissionDate"
+        android:id="@+id/student_admission_date_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="DateOfBirth"
+        android:id="@+id/student_birth_date_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="ShiftId"
+        android:id="@+id/student_shift_id_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="classId"
+        android:id="@+id/student_class_id_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="sectionId"
+        android:id="@+id/student_section_id_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="imageName"
+        android:id="@+id/student_image_url_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="createdTime"
+        android:id="@+id/student_created_time_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="createdBy"
+        android:id="@+id/student_created_by_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="status"
+        android:id="@+id/student_status_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="Guardian_Phone"
+        android:id="@+id/student_guardian_phone_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+    <EditText
+        android:hint="Relation"
+        android:id="@+id/student_relation_add"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:textAlignment="center" />
+
+    <Button
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:textColor="@color/white"
+        android:background="@color/purple_500"
+        android:id="@+id/Student_add_btn" />
+</LinearLayout>

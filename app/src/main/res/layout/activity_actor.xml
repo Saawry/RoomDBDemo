@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".actor.ActorActivity">
+    <TextView
+        android:textAllCaps="false"
+        android:padding="10dp"
+        android:id="@+id/actor_details_tv"
+        android:layout_width="match_parent"
+        android:layout_height="600dp">
+    </TextView>
+
+    <Button
+        android:textAllCaps="false"
+        android:layout_margin="10dp"
+        android:text="Delete All"
+        android:id="@+id/button_delete_all_actors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_add_circle_24" />
+</LinearLayout>
