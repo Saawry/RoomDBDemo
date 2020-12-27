@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.roomdatabasedemo.Product;
 import com.example.roomdatabasedemo.R;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ActorViewHol
     @NonNull
     @Override
     public ActorViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ViewGroup itemView = (ViewGroup) LayoutInflater.from(parent.getContext())
+        View itemView =  LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.actor_card,parent,false);
         return new ActorViewHolder(itemView);
     }
@@ -51,6 +52,11 @@ public class ActorAdapter extends RecyclerView.Adapter<ActorAdapter.ActorViewHol
     public void getAllActors(List<Actor> actorList){
         this.actorList=actorList;
         //notifyDataSetChanged();
+    }
+
+    public void setAllActors(List<Actor> allActors) {
+        this.actorList = allActors;
+        notifyDataSetChanged();
     }
     public class ActorViewHolder extends RecyclerView.ViewHolder{
         TextView id_tv,name_tv,age_tv;

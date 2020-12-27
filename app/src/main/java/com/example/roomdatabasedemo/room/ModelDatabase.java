@@ -19,8 +19,8 @@ public abstract class ModelDatabase extends RoomDatabase {
     public static synchronized ModelDatabase getInstance(Context context){
         if (instance== null){
             instance= Room.databaseBuilder(context.getApplicationContext(),
-                    ModelDatabase.class, "model_database")//product_database
-                    //.fallbackToDestructiveMigration()
+                    ModelDatabase.class, "product_database")//
+                    .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
                     .build();
         }

@@ -34,13 +34,13 @@ public class ActorActivity extends AppCompatActivity {
     private ModelRepository modelRepository;
     private ObjectViewModel viewModel;
     private List<Actor> actorList;
-    private ActorAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actor);
 
-        recyclerView=findViewById(R.id.actor_recycler);
+        recyclerView = findViewById(R.id.actor_recycler);
         actorList = new ArrayList<>();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -49,38 +49,38 @@ public class ActorActivity extends AppCompatActivity {
 
         //recyclerView.setAdapter(adapter);
 
-        adapter = new ActorAdapter(actorList, this);
+        final ActorAdapter adapter = new ActorAdapter(actorList, this);
         modelRepository = new ModelRepository(getApplication());
         viewModel = new ViewModelProvider(this).get(ObjectViewModel.class);
 
         viewModel.getActorList().observe(this, actors -> {
                     adapter.getAllActors(actorList);
                     recyclerView.setAdapter(adapter);
-                    Log.d("main","onChanged"+actorList);
-
+                    //Log.d("main","onChanged"+actorList);
                 }
         );
-
-
-
-
-
-        Call<List<Actor>> call = RetrofitClient.getInstance().getApi().GetActorDetails();
-        call.enqueue(new Callback<List<Actor>>() {
-            @Override
-            public void onResponse(Call<List<Actor>> call, Response<List<Actor>> response) {
-                if (response.isSuccessful()) {
-                    modelRepository.InsertActors(response.body());
-                } else {
-                    Toast.makeText(ActorActivity.this, response.code() + " - " + response.message(), Toast.LENGTH_SHORT).show();
+        try {
+            Call<List<Actor>> call = RetrofitClient.getInstance().getApi().GetActorDetails();
+            call.enqueue(new Callback<List<Actor>>() {
+                @Override
+                public void onResponse(Call<List<Actor>> call, Response<List<Actor>> response) {
+                    if (response.isSuccessful()) {
+                        actorList = response.body();
+                        //Toast.makeText(ActorActivity.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                        modelRepository.InsertActors(response.body());
+                    } else {
+                        Toast.makeText(ActorActivity.this, response.code() + " - " + response.message(), Toast.LENGTH_SHORT).show();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<List<Actor>> call, Throwable t) {
-                Toast.makeText(ActorActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                @Override
+                public void onFailure(Call<List<Actor>> call, Throwable t) {
+                    Toast.makeText(ActorActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 
-            }
-        });
+                }
+            });
+        } catch (Exception ex) {
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 }

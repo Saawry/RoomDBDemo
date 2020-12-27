@@ -3,6 +3,7 @@ package com.example.roomdatabasedemo;
 //import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             startActivityForResult(intent, ADD_PRODUCT_REQUEST);
         });
 
-        objectViewModel = ViewModelProviders.of(this).get(ObjectViewModel.class);
+        objectViewModel = new ViewModelProvider(this).get(ObjectViewModel.class);
         objectViewModel.getAllProducts().observe(this, products -> adapter.setProducts(products));
 
 

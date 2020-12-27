@@ -9,12 +9,12 @@ import androidx.annotation.NonNull;
 public class Actor {
     @PrimaryKey(autoGenerate = true)
     private int LocalId;
-    private int id;
+    private String id;
     private String name;
     private String image;
-    private int age;
+    private String age;
 
-    public Actor(int id, String name, String image, int age) {
+    public Actor(String id, String name, String image, String age) {
         this.id = id;
         this.name = name;
         this.image = image;
@@ -29,13 +29,6 @@ public class Actor {
         LocalId = localId;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -53,11 +46,19 @@ public class Actor {
         this.image = image;
     }
 
-    public int getAge() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 }
