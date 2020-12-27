@@ -7,17 +7,16 @@ package com.example.roomdatabasedemo.room;
 //import androidx.room.Query;
 //import androidx.room.Update;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.persistence.room.Dao;
-import android.arch.persistence.room.Delete;
-import android.arch.persistence.room.Insert;
-import android.arch.persistence.room.OnConflictStrategy;
-import android.arch.persistence.room.Query;
-import android.arch.persistence.room.Update;
+import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
+import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.roomdatabasedemo.Product;
 import com.example.roomdatabasedemo.actor.Actor;
-import com.example.roomdatabasedemo.students.StudentInfo;
 
 import java.util.List;
 
@@ -40,31 +39,17 @@ public interface ModelDAO {
     void deleteAllProducts();
 
 
-    @Insert
-    void insertStudent(StudentInfo studentInfo);
+
+
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAllStudent(List<StudentInfo> studentsInfo);
+    void InsertActors(List<Actor> actorList);
 
-    @Delete
-    void deleteStudent(StudentInfo studentInfo);
+    @Query("delete from actor_table")
+    void deleteAllActors();
 
-    @Update
-    void updateStudent(StudentInfo studentInfo);
-
-    @Query("select * from students_info_table")
-    LiveData<List<StudentInfo>> getAllStudents();
-
-    @Query("delete from students_info_table")
-    void deleteAllStudents();
-
-
-
-    //--------
     @Query("select * from actor_table")
-    LiveData<List<Actor>> getAllActors();
-
-    @Insert
-    void insertActors(List<Actor> actor);
+    LiveData<List<Actor>> getAllActor();
 
 
 }

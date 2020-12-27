@@ -1,9 +1,6 @@
 package com.example.roomdatabasedemo.rest;
 
 import com.example.roomdatabasedemo.actor.Actor;
-import com.example.roomdatabasedemo.actor.ActorResponse;
-import com.example.roomdatabasedemo.students.AllStudentsResponse;
-import com.example.roomdatabasedemo.students.StudentDetailsResponse;
 
 import java.util.List;
 
@@ -15,23 +12,23 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface Api {
-    @FormUrlEncoded
-    @POST("Api/Student/AddStudent")
-    Call<ResponseBody> AddNewStudent(
-            @Field("studentId") String studentId,
-            @Field("studentRoll") String studentRoll,
-            @Field("admissionDate") String admissionDate,
-            @Field("DateOfBirth") String DateOfBirth,
-            @Field("ShiftId") String ShiftId,
-            @Field("classId") String classId,
-            @Field("sectionId") String sectionId,
-            @Field("imageName") String imageName,
-            @Field("createdTime") String createdTime,
-            @Field("createdBy") String createdBy,
-            @Field("status") String status,
-            @Field("Guardian_Phone") String Guardian_Phone,
-            @Field("Relation") String Relation
-    );
+//    @FormUrlEncoded
+//    @POST("Api/Student/AddStudent")
+//    Call<ResponseBody> AddNewStudent(
+//            @Field("studentId") String studentId,
+//            @Field("studentRoll") String studentRoll,
+//            @Field("admissionDate") String admissionDate,
+//            @Field("DateOfBirth") String DateOfBirth,
+//            @Field("ShiftId") String ShiftId,
+//            @Field("classId") String classId,
+//            @Field("sectionId") String sectionId,
+//            @Field("imageName") String imageName,
+//            @Field("createdTime") String createdTime,
+//            @Field("createdBy") String createdBy,
+//            @Field("status") String status,
+//            @Field("Guardian_Phone") String Guardian_Phone,
+//            @Field("Relation") String Relation
+//    );
 
 //    @FormUrlEncoded
 //    @POST("Api/Student/AddStudent")
@@ -39,13 +36,7 @@ public interface Api {
 //            @Field("studentInfo") StudentInfo studentInfo
 //    );
 
-    @GET("Api/Student/GetStudent")
-    Call<StudentDetailsResponse> GetStudentDetails(
-            @Field("studentId") String studentId
-    );
 
-    @GET("Api/Student/GetAllStudent")
-    Call<AllStudentsResponse> GetAllStudentDetails();
 
 
 

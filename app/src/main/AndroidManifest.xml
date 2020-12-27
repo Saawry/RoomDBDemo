@@ -13,9 +13,6 @@
         android:theme="@style/Theme.RoomDatabaseDemo"
         android:usesCleartextTraffic="true">
         <activity android:name=".actor.ActorActivity"></activity>
-        <activity android:name=".students.AllStudentsInfo" />
-        <activity android:name=".students.ViewStudentDetails" />
-        <activity android:name=".students.AddStudent" />
         <activity android:name=".UpdateActivity" />
         <activity android:name=".AddProductActivity" />
         <activity android:name=".MainActivity">

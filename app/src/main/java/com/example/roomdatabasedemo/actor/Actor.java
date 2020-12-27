@@ -1,21 +1,18 @@
 package com.example.roomdatabasedemo.actor;
 
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+import androidx.annotation.NonNull;
 
 @Entity(tableName = "actor_table")
 public class Actor {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    private int LocalId;
     private int id;
     private String name;
     private String image;
     private int age;
-
-    @Ignore
-    public Actor() {
-    }
 
     public Actor(int id, String name, String image, int age) {
         this.id = id;
@@ -23,12 +20,21 @@ public class Actor {
         this.image = image;
         this.age = age;
     }
-    public void setId(int id) {
-        this.id = id;
+
+    public int getLocalId() {
+        return LocalId;
+    }
+
+    public void setLocalId(int localId) {
+        LocalId = localId;
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -53,11 +59,5 @@ public class Actor {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    @NonNull
-    @Override
-    public String toString() {
-        return super.toString();
     }
 }

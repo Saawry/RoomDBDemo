@@ -1,10 +1,16 @@
 package com.example.roomdatabasedemo.actor;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,9 +19,8 @@ import com.example.roomdatabasedemo.R;
 import com.example.roomdatabasedemo.rest.RetrofitClient;
 import com.example.roomdatabasedemo.room.ModelRepository;
 import com.example.roomdatabasedemo.room.ObjectViewModel;
-import com.example.roomdatabasedemo.students.AllStudentsInfo;
-import com.example.roomdatabasedemo.students.AllStudentsResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.ResponseBody;
@@ -25,55 +30,38 @@ import retrofit2.Response;
 
 public class ActorActivity extends AppCompatActivity {
 
-    private TextView tv;
-    private Button btn;
-    private ObjectViewModel objectViewModel;
+    private RecyclerView recyclerView;
     private ModelRepository modelRepository;
+    private ObjectViewModel viewModel;
+    private List<Actor> actorList;
+    private ActorAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actor);
 
-        tv=findViewById(R.id.actor_details_tv);
-        btn=findViewById(R.id.button_actor);
-        modelRepository=new ModelRepository(getApplication());
+        recyclerView=findViewById(R.id.actor_recycler);
+        actorList = new ArrayList<>();
 
-        objectViewModel = ViewModelProviders.of(this).get(ObjectViewModel.class);
-        //objectViewModel.getAllActors().observe(this,actors -> );
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        final Observer<List<Actor>> ActorObserver = NewActor -> {
-            // Update the UI, in this case, a TextView.
-            tv.setText(NewActor.toString());
-        };
+        //recyclerView.setAdapter(adapter);
 
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        objectViewModel.getAllActors().observe(this, ActorObserver);
-        //objectViewModel.getAllStudents().observe(this, studentsInfo -> adapter.setStudents(studentsInfo));
+        adapter = new ActorAdapter(actorList, this);
+        modelRepository = new ModelRepository(getApplication());
+        viewModel = new ViewModelProvider(this).get(ObjectViewModel.class);
 
-//        Call<ActorResponse> call = RetrofitClient.getInstance().getApi().GetActorDetails();
-//        call.enqueue(new Callback<ActorResponse>() {
-//            @Override
-//            public void onResponse(Call<ActorResponse> call, Response<ActorResponse> response) {
-//                if (response.isSuccessful()) {
-//
-//                    tv.setText(response.body().toString());
-//
-//                    //modelRepository.InsertAllActors(response.body().getActors());
-//                    //tv.setText(response.body().getActors().toString());
-////                    List<StudentInfo> studentList;
-////                    studentList=response.body().getStudentInfoList();
-////                    adapter.setStudents(studentList);
-//                } else {
-//                    Toast.makeText(ActorActivity.this, response.code() + " - " + response.message(), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ActorResponse> call, Throwable t) {
-//                Toast.makeText(ActorActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
+        viewModel.getActorList().observe(this, actors -> {
+                    adapter.getAllActors(actorList);
+                    recyclerView.setAdapter(adapter);
+                    Log.d("main","onChanged"+actorList);
+
+                }
+        );
+
+
 
 
 
@@ -82,8 +70,7 @@ public class ActorActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Actor>> call, Response<List<Actor>> response) {
                 if (response.isSuccessful()) {
-
-                    tv.setText(response.message());
+                    modelRepository.InsertActors(response.body());
                 } else {
                     Toast.makeText(ActorActivity.this, response.code() + " - " + response.message(), Toast.LENGTH_SHORT).show();
                 }

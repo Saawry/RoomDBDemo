@@ -1,7 +1,7 @@
 package com.example.roomdatabasedemo.room;
 
 import android.app.Application;
-import android.arch.lifecycle.LiveData;
+import androidx.lifecycle.LiveData;
 import android.os.AsyncTask;
 
 //import androidx.lifecycle.LiveData;
@@ -9,26 +9,21 @@ import android.os.AsyncTask;
 
 import com.example.roomdatabasedemo.Product;
 import com.example.roomdatabasedemo.actor.Actor;
-import com.example.roomdatabasedemo.students.StudentInfo;
 
 import java.util.List;
 
 public class ModelRepository {
     private ModelDAO modelDAO;
+    private ModelDatabase modelDatabase;
     private LiveData<List<Product>> allProducts;
-    private LiveData<List<StudentInfo>> allStudents;
-
-
     private LiveData<List<Actor>> allActors;
 
     public ModelRepository(Application application) {
 
-        ModelDatabase modelDatabase = ModelDatabase.getInstance(application);
+        modelDatabase = ModelDatabase.getInstance(application);
         modelDAO = modelDatabase.modelDAO();
         allProducts = modelDAO.getAllProducts();
-        allStudents = modelDAO.getAllStudents();
-
-        allActors = modelDAO.getAllActors();
+        allActors = modelDAO.getAllActor();
     }
 
     public void insert(Product product) {
@@ -123,105 +118,31 @@ public class ModelRepository {
 //    }
 
 
-    public void InsertStudent(StudentInfo studentInfo){new InsertStudentAsyncTask(modelDAO).execute(studentInfo);}
-    public void UpdateStudent(StudentInfo studentInfo){new UpdateStudentAsyncTask(modelDAO).execute(studentInfo);}
-    public void DeleteStudent(StudentInfo studentInfo){new DeleteStudentAsyncTask(modelDAO).execute(studentInfo);}
-    public void DeleteAllStudent(){new DeleteAllStudentAsyncTask(modelDAO).execute();}
-    public void InsertAllStudent(List<StudentInfo> studentInfoList){new InsertAllStudentAsyncTask(modelDAO).execute(studentInfoList);}
-    public LiveData<List<StudentInfo>> getAllStudents() {
-        return allStudents;
-    }
 
-    private static class InsertStudentAsyncTask extends AsyncTask<StudentInfo,Void,Void>{
-
-        private ModelDAO modelDAO;
-
-        public InsertStudentAsyncTask(ModelDAO modelDAO) {
-            this.modelDAO = modelDAO;
-        }
-
-        @Override
-        protected Void doInBackground(StudentInfo... studentInfos) {
-            modelDAO.insertStudent(studentInfos[0]);
-            return null;
-        }
-    }
-    private static class UpdateStudentAsyncTask extends AsyncTask<StudentInfo,Void,Void>{
-
-        private ModelDAO modelDAO;
-
-        public UpdateStudentAsyncTask(ModelDAO modelDAO) {
-            this.modelDAO = modelDAO;
-        }
-
-        @Override
-        protected Void doInBackground(StudentInfo... studentInfos) {
-            modelDAO.updateStudent(studentInfos[0]);
-            return null;
-        }
-    }
-    private static class DeleteStudentAsyncTask extends AsyncTask<StudentInfo,Void,Void>{
-
-        private ModelDAO modelDAO;
-
-        public DeleteStudentAsyncTask(ModelDAO modelDAO) {
-            this.modelDAO = modelDAO;
-        }
-
-        @Override
-        protected Void doInBackground(StudentInfo... studentInfos) {
-            modelDAO.deleteStudent(studentInfos[0]);
-            return null;
-        }
-    }
-    private static class DeleteAllStudentAsyncTask extends AsyncTask<Void,Void,Void>{
-
-        private ModelDAO modelDAO;
-
-        public DeleteAllStudentAsyncTask(ModelDAO modelDAO) {
-            this.modelDAO = modelDAO;
-        }
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            modelDAO.deleteAllStudents();
-            return null;
-        }
-    }
-    private static class InsertAllStudentAsyncTask extends AsyncTask<List<StudentInfo>,Void,Void>{
-        private ModelDAO modelDAO;
-
-        public InsertAllStudentAsyncTask(ModelDAO modelDAO) {
-            this.modelDAO = modelDAO;
-        }
-
-        @Override
-        protected Void doInBackground(List<StudentInfo>... lists) {
-            modelDAO.insertAllStudent(lists[0]);
-            return null;
-        }
-    }
 
 
 
 
     //--------------
 
-    public LiveData<List<Actor>> getAllActors() {
+    public void InsertActors(List<Actor> actors){
+
+        new InsertAsyncTAsk(modelDatabase).execute(actors);
+    }
+
+    public LiveData<List<Actor>> getAllActors(){
         return allActors;
     }
-    public void InsertAllActors(List<Actor> actors){new InsertAllActors(modelDAO).execute(actors);}
-    private static class InsertAllActors extends AsyncTask<List<Actor>,Void,Void>{
 
+    public class InsertAsyncTAsk extends AsyncTask<List<Actor>,Void,Void>{
         private ModelDAO modelDAO;
-
-        public InsertAllActors(ModelDAO modelDAO) {
-            this.modelDAO = modelDAO;
+        public InsertAsyncTAsk(ModelDatabase modelDatabase) {
+            modelDAO=modelDatabase.modelDAO();
         }
 
         @Override
         protected Void doInBackground(List<Actor>... lists) {
-            modelDAO.insertActors(lists[0]);
+            modelDAO.InsertActors(lists[0]);
             return null;
         }
     }
